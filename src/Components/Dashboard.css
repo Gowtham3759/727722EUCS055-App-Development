@@ -1,0 +1,107 @@
+/* General styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin: 0 1rem;
+  position: relative;
+}
+
+.navbar-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #1abc9c;
+  transition: width 0.3s;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Dashboard content styles */
+.dashboard-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.main-section {
+  flex-grow: 1;
+  background-color: #ecf0f1;
+  transition: all 0.3s ease;
+  height: 80vh;
+}
+
+.main-section.expanded {
+  padding-left: 60px;
+}
+
+.main-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.content-panel {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,13 @@
+.all
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    font-size: large;
+    font-weight:600;
+}
+.button
+{
+    margin-bottom: 5%;
+}

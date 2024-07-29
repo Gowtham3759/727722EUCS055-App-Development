@@ -1,0 +1,124 @@
+.main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .topic {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-bottom: 2%;
+  }
+  
+  .content {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .container-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem; 
+  }
+  .container {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    margin: 0.625rem;
+    padding: 0.625rem; 
+    border: 3px solid black;
+    border-radius: 0.8rem; 
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+    text-align: center;
+    max-width: calc(33.333% - 1.25rem); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  }
+  .container img {
+    max-width: 100%;
+    height: 80%;
+  }
+  
+  .container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  @media (max-width: 48rem) { 
+    .container {
+      flex: 1 1 45%;
+      max-width: calc(50% - 1.25rem); 
+    }
+  }
+  
+  @media (max-width: 30rem) { 
+    .container {
+      flex: 1 1 100%;
+      max-width: calc(100% - 1.25rem);
+    }
+  }
+  .name {
+    font-size: larger;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 0.5rem;
+  }
+  .age-buttons button {
+    margin: 0 1.5rem; 
+    padding: 1rem 2rem; 
+    font-size: 1.25rem;
+    font-weight: bold; 
+    border: none; 
+    border-radius: 1.5rem; 
+    background: linear-gradient(145deg, #6e8efb, #a777e3); 
+    color: white; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
+  .age-buttons button:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .age-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .topic h1 {
+    font-family: 'Pacifico', cursive; 
+    font-size: 3rem; 
+    font-weight: bold;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.8); 
+    margin: 0;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+  }
+  .container p {
+    font-family: 'Arial', sans-serif; 
+    font-size:larger; 
+    font-weight:500;
+    color: #333; 
+    margin: 0.5rem 0; 
+    line-height: 1.5; 
+    text-transform: capitalize; 
+  }
+  video {
+    width: 100%;
+    height: var(--video-height);
+    max-width: 100%;
+    border: 0.125rem solid #ccc;
+    border-radius: 0.625rem;
+  }
+  
+  .name {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+  

@@ -1,5 +1,6 @@
 /* src/App.css */
-body {
+
+.flipbook-page {
   font-family: Arial, sans-serif;
   background-color: #f0f8ff;
   color: #333;
@@ -8,15 +9,16 @@ body {
 }
 
 .flipbook-page {
-  padding: 0% 5% ;
+  padding: 2% 5%;
 }
 
 .age-selector {
   margin-bottom: 20px;
+  text-align: center;
 }
 
-button {
-  margin: 20px 0px 5px 20px;
+.ageBtn {
+  margin: 20px 5px;
   padding: 10px 20px;
   background-color: #333;
   color: white;
@@ -26,9 +28,8 @@ button {
   transition: background-color 0.3s ease;
 }
 
-#ageTag{
-  margin: 20px 0px 5px 20px;
-  
+#ageTag {
+  margin: 20px 5px;
 }
 
 button:hover {
@@ -42,15 +43,15 @@ button:hover {
 }
 
 .flipbook-item {
-  place-content: center;
-  flex: 1 0 25%;
-  margin: 20px;
-  padding: 25px 30px;
+  flex: 1 0 10%; /* Adjusted for better responsiveness */
+  margin: 10x 5px 0px ;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease;
+  text-align: center; /* Center content */
 }
 
 .flipbook-item:hover {
@@ -59,15 +60,30 @@ button:hover {
 
 .flipbook-title {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 15px;
   font-size: 1.2em;
   color: #555;
 }
 
-.container{
-  border: 0px;
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .flipbook-item {
+    flex: 1 0 45%;
+  }
 }
 
-.heyzine-flip{
-  width: 0px;
+@media (max-width: 768px) {
+  .flipbook-item {
+    flex: 1 0 100%;
+    margin: 10px 0;
+  }
+
+  .ageBtn {
+    padding: 8px 16px;
+  }
+
+  .flipbook-title {
+    font-size: 1em;
+  }
 }

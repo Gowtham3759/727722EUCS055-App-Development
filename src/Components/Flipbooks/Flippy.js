@@ -28,9 +28,9 @@ const Flippy = () => {
   return (
     <div className="flipbook-page">
       <div className="age-selector">
-        <button onClick={() => setAgeRange('0-3')}>0-3</button>
-        <button onClick={() => setAgeRange('4-6')}>4-6</button>
-        <button onClick={() => setAgeRange('7-12')}>7-12</button>
+        <button className='ageBtn' onClick={() => setAgeRange('0-3')}>0-3</button>
+        <button className='ageBtn' onClick={() => setAgeRange('4-6')}>4-6</button>
+        <button className='ageBtn' onClick={() => setAgeRange('7-12')}>7-12</button>
       </div>
       <h3 id='ageTag'>Age Category: {ageRange}</h3>
       <div className="flipbook-container">

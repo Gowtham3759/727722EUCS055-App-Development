@@ -17,7 +17,7 @@ body {
   width: 100%;
   background: url('fullback.jpg') no-repeat center center;
   background-size: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-sizing: border-box;
   text-align: center;
   color: white;

@@ -15,6 +15,7 @@ import Settings from './Settings';
 import Flippy from './Flipbooks/Flippy';
 import SidePanel from './SidePanel';
 import Animation from './Animations';
+import Payment from './Payments';
 import Contact from './Contact';
 
 const Dashboard = () => {
@@ -48,7 +49,7 @@ const Dashboard = () => {
       case 'assessment':
         return <Assessment />;
       case 'resource-library':
-        return <ResourceLibrary />;
+        return <Payment />;
       case 'settings':
         return <Settings />;
       case 'storybook':

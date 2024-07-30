@@ -17,10 +17,10 @@ const SidePanel = ({ activeView, onViewChange, onCollapse, collapsed }) => {
           { key: 'online-classes', icon: <FaGraduationCap />, text: 'Online Classes' },
           { key: 'sis', icon: <FaUser />, text: 'Educative Quiz' },
           { key: 'assessment', icon: <FaCheckCircle />, text: 'Assessment' },
-          { key: 'resource-library', icon: <FaBookOpen />, text: 'Resource Library' },
+          { key: 'resource-library', icon: <FaBookOpen />, text: 'Payment' },
           { key: 'communication-tools', icon: <FaEnvelope />, text: 'Contact Us' },
           { key: 'educational-content', icon: <FaBook />, text: 'Educational Content' },
-          { key: 'settings', icon: <FaCog />, text: 'Settings' }
+          // { key: 'settings', icon: <FaCog />, text: 'Settings' }
         ].map(({ key, icon, text }) => (
           <li key={key}>
             <button

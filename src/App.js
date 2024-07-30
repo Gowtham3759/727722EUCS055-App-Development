@@ -6,6 +6,9 @@ import Dashboard from './Components/Dashboard';
 import Payment from './Components/Payments';
 import Contact from './Components/Contact';
 
+import AdminPage from './Components/AdminPage';
+import AdminDashboard from './Components/AdminDashboard';
+
 const App = () => {
   return (
     <Router>
@@ -14,6 +17,8 @@ const App = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
       </Routes>
     </Router>

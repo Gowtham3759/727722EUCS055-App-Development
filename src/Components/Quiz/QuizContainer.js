@@ -28,6 +28,9 @@ const QuizContainer = () => {
           };
         });
         setQuestions(formattedQuestions);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
       });
   }, []);
 
@@ -48,12 +51,15 @@ const QuizContainer = () => {
   }
 
   return (
-    <div>
-      {questions.length > 0 && (
+    <div id='qbox'>
+      <br/>
+      {questions.length > 0 ? (
         <Question
           question={questions[currentQuestionIndex]}
           onAnswerClick={handleAnswerClick}
         />
+      ) : (
+        <p id='load'>Loading questions...</p>
       )}
     </div>
   );

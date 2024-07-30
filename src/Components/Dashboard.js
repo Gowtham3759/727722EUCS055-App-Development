@@ -9,7 +9,7 @@ import LMS from './LMS';
 import OnlineClasses from './OnlineClasses';
 import SIS from './SIS';
 import CommunicationTools from './CommunicationTools';
-import Assessment from './Assessment';
+import Assessment from './Assessment copy';
 import ResourceLibrary from './ResourceLibrary';
 import Settings from './Settings';
 import Flippy from './Flipbooks/Flippy';

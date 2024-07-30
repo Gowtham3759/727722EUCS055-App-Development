@@ -19,7 +19,7 @@ const SidePanel = ({ activeView, onViewChange, onCollapse, collapsed }) => {
           { key: 'assessment', icon: <FaCheckCircle />, text: 'Assessment' },
           { key: 'resource-library', icon: <FaBookOpen />, text: 'Payment' },
           { key: 'communication-tools', icon: <FaEnvelope />, text: 'Contact Us' },
-          { key: 'educational-content', icon: <FaBook />, text: 'Educational Content' },
+          // { key: 'educational-content', icon: <FaBook />, text: 'Educational Content' },
           // { key: 'settings', icon: <FaCog />, text: 'Settings' }
         ].map(({ key, icon, text }) => (
           <li key={key}>

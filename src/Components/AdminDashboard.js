@@ -4,6 +4,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [newUser, setNewUser] = useState({
     firstName: '',
@@ -23,15 +24,18 @@ const AdminDashboard = () => {
   const [activeLink, setActiveLink] = useState('/admin-dashboard');
   const [popupMessage, setPopupMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchUsers();
     fetchAdmins();
+    fetchOrders();
   }, []);
 
   const fetchUsers = async () => {
     try {
       const response = await fetch('http://localhost:8080/users');
+      if (!response.ok) throw new Error('Network response was not ok.');
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -42,12 +46,25 @@ const AdminDashboard = () => {
   const fetchAdmins = async () => {
     try {
       const response = await fetch('http://localhost:8080/admins');
+      if (!response.ok) throw new Error('Network response was not ok.');
       const data = await response.json();
       setAdmins(data);
     } catch (error) {
       console.error('Error fetching admins:', error);
     }
   };
+
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/orders');
+      const data = await response.json();
+      console.log('Fetched Orders:', data); // Log data to check courseName
+      setOrders(data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
+  
 
   const showPopupMessage = (message) => {
     setPopupMessage(message);
@@ -142,6 +159,21 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleApproveOrder = async (id) => {
+    try {
+      await fetch(`http://localhost:8080/orders/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'Approved' })
+      });
+      fetchOrders(); // Fetch orders again to reflect the change
+      showPopupMessage('Order approved successfully!');
+    } catch (error) {
+      console.error('Error approving order:', error);
+    }
+  };
+  
+
   const handleSignOut = () => {
     localStorage.removeItem('adminToken');
     window.location.href = '/login';
@@ -187,6 +219,15 @@ const AdminDashboard = () => {
                 onClick={() => handleLinkClick('/admin-add-admin')}
               >
                 Add Admin
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className={activeLink === '/admin-manage-orders' ? 'active' : ''}
+                onClick={() => handleLinkClick('/admin-manage-orders')}
+              >
+                Manage Orders
               </a>
             </li>
           </ul>
@@ -374,6 +415,38 @@ const AdminDashboard = () => {
               </form>
             </div>
           )}
+          {activeLink === '/admin-manage-orders' && (
+  <div className="manage-orders23">
+    <h3>Orders</h3>
+    {loading ? <p>Loading...</p> : (
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Course Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.courseName}</td> {/* Ensure this is correctly mapped */}
+              <td>{order.status}</td>
+              <td>
+                {order.status !== 'Approved' && (
+                  <button onClick={() => handleApproveOrder(order.id)}>Approve</button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+)}
+
         </div>
       </div>
       {showPopup && <div className="popup-message23">{popupMessage}</div>}

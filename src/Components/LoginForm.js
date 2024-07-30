@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
 import { FaEnvelope,FaLock } from 'react-icons/fa';
+import { UserContext } from './UserContext';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
   const navigate = useNavigate();
-
+  const { setUserName1 } = useContext(UserContext); 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,6 +19,7 @@ const LoginForm = () => {
     try {
       const response = await axios.get('http://localhost:8080/users');
       setLoginMessage('Login successful');
+      setUserName1(email);
       navigate('/dashboard');
     } catch (error) {
       setLoginMessage('Invalid email or password');

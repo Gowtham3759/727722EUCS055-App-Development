@@ -11,7 +11,8 @@
   }
   
   .answer-button {
-    background-color: #f0f0f0;
+    background-color: rgb(70, 152, 246);
+
     border: 3px solid black;
     width: 60vw;
     padding: 20px 20px;

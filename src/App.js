@@ -3,11 +3,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RegisterForm from './Components/RegisterForm';
 import LoginForm from './Components/LoginForm';
 import Dashboard from './Components/Dashboard'; 
+import Payment from './Components/Payments';
+import Contact from './Components/Contact';
+
 import AdminPage from './Components/AdminPage';
 import AdminDashboard from './Components/AdminDashboard';
+import { UserProvider } from './Components/UserContext';
+// import { UserProvider } from './Components/UserContext';
+
 const App = () => {
   return (
-    <Router>
+      <UserProvider>
+        <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} /> 
         <Route path="/login" element={<LoginForm />} />
@@ -18,6 +25,7 @@ const App = () => {
 
       </Routes>
     </Router>
+      </UserProvider>
   );
 };
 

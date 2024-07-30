@@ -51,7 +51,7 @@ const Animations = () => {
       <div className="content">
         <div className="container-row">
           {stories.map(story => (
-            <div key={story.id} className="container">
+            <div key={story.id} id="container">
               <video width="640" height="360" controls>
                 <source src={story.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.

@@ -8,16 +8,15 @@ import Contact from './Components/Contact';
 
 const App = () => {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<LoginForm />} /> 
-    //     <Route path="/login" element={<LoginForm />} />
-    //     <Route path="/register" element={<RegisterForm />} />
-    //     <Route path="/dashboard" element={<Dashboard />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginForm />} /> 
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-    //   </Routes>
-    // </Router>
-    <Contact/>
+      </Routes>
+    </Router>
   );
 };
 

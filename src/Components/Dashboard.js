@@ -17,6 +17,7 @@ import SidePanel from './SidePanel';
 import Animation from './Animations';
 import Payment from './Payments';
 import Contact from './Contact';
+import QuizContainer from './Quiz/QuizContainer'
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Dashboard = () => {
       case 'online-classes':
         return <OnlineClasses />;
       case 'sis':
-        return <SIS />;
+        return <QuizContainer />;
       case 'communication-tools':
         return <Contact />;
       case 'assessment':

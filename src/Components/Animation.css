@@ -9,16 +9,6 @@
   overflow:auto
   }
   
-  .topic {
-    background-color: black;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    margin-bottom: 2%;
-  }
-  
   .content {
     width: 90%;
     margin: 0 auto;
@@ -124,5 +114,15 @@
   .name {
     margin-top: 0.5rem;
     font-size: 1rem;
+  }
+  
+  #topic {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-bottom: 2%;
   }
   

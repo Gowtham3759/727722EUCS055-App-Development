@@ -161,6 +161,7 @@ const Assessment = () => {
   };
 
   return (
+    <div className="all3">
     <div className="assessment-container">
       <h1>{currentStory.title}</h1>
       <p>{currentStory.content}</p>
@@ -191,6 +192,7 @@ const Assessment = () => {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 };

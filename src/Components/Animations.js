@@ -39,7 +39,7 @@ const Animations = () => {
 
   return (
     <div className="main-layout">
-      <div className="topic">
+      <div id="topic">
         <h1>ANIMATIVE STORY BOOKS</h1>
       </div>
       <div className="age-buttons">

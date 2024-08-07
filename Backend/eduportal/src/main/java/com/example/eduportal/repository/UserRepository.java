@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer>
 {
+    User findByEmail(String username);
     @Transactional
     @Modifying
     @Query("DELETE FROM User u WHERE u.id=:id")

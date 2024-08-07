@@ -1,16 +1,27 @@
 package com.example.eduportal.model;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class User 
+@Builder
+public class User implements UserDetails 
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +29,14 @@ public class User
     String firstname;
     String lastname;
     String email;
+    @OneToOne(mappedBy = "user")
+    private RefreshToken refreshToken;
+    public RefreshToken getRefreshToken() {
+        return refreshToken;
+    }
+    public void setRefreshToken(RefreshToken refreshToken) {
+        this.refreshToken = refreshToken;
+    }
     public Set<Course> getCourses() {
         return courses;
     }
@@ -63,6 +82,15 @@ public class User
     }
     public void setPremium(Boolean premium) {
         this.premium = premium;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+    @Override
+    public String getUsername() {
+        return email;
     }
 
 }

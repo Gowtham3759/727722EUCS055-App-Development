@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.eduportal.model.Course;
+import com.example.eduportal.model.PaymentInfo;
 import com.example.eduportal.model.User;
 import com.example.eduportal.repository.CourseRepository;
+import com.example.eduportal.repository.PaymentRepository;
 import com.example.eduportal.repository.UserRepository;
 
 @Service
@@ -18,6 +20,8 @@ public class UserService
     UserRepository repo;
     @Autowired
     CourseRepository crepo;
+    @Autowired
+    PaymentRepository prepo;
     public void post(User obj)
     {
         repo.save(obj);
@@ -25,6 +29,10 @@ public class UserService
     public List<User> findall()
     {
         return repo.findAll();
+    }
+    public void removeuser(int userid)
+    {
+        repo.deleteuser(userid);
     }
     public void enroll(int userid,int courseid)
     {
@@ -43,6 +51,16 @@ public class UserService
         Optional<User>d=repo.findById(userId);
         User obj=d.get();
         obj.setPassword(newpassword);
+        repo.save(obj);
+    }
+    public List<PaymentInfo> getPayments(String name)
+    {
+        return prepo.getPaymentsOfUser(name);
+    }
+    public void upgrade(int id)
+    {
+        User obj=repo.findById(id).get();
+        obj.setPremium(true);
         repo.save(obj);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.eduportal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,15 @@ public class PaymentController
     @Autowired
     PaymentService service;
     @PostMapping("/post")
-    public PaymentInfo pget(@RequestBody PaymentInfo obj)
+    public PaymentInfo post(@RequestBody PaymentInfo obj)
     {
         service.ppost(obj);
         return obj;
+    }
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable int id)
+    {
+        service.deletepayment(id);
+        return "payment removed successfully";
     }
 }

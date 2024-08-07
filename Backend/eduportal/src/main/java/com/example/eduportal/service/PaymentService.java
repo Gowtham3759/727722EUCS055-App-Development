@@ -10,9 +10,13 @@ import com.example.eduportal.repository.PaymentRepository;
 public class PaymentService 
 {
     @Autowired
-    private PaymentRepository prepo;
+    public PaymentRepository repo;
     public void ppost(PaymentInfo info)
     {
-        prepo.save(info);
+        repo.save(info);
+    }
+    public void deletepayment(int id) {
+        PaymentInfo obj=repo.findById(id).get();
+        repo.delete(obj);
     }
 }

@@ -21,4 +21,16 @@ public class CourseService
     {
         return repo.findAll();
     }
+    public Course dcourse(int id) 
+    {
+        Course obj=repo.findById(id).get();
+        repo.delete(obj);
+        return obj;
+    }
+    public void changecost(int id,int newcost) 
+    {
+        Course obj=repo.findById(id).get();
+        obj.setCost(newcost);
+        repo.save(obj);
+    }
 }

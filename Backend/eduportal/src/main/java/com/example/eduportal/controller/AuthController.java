@@ -36,15 +36,16 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
-        User user = refreshToken.getUser();
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody LoginRequest loginRequest) {
+        // RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
+        // User user = refreshToken.getUser();
 
-        String accessToken = jwtService.generateToken(user);
+        // String accessToken = jwtService.generateToken(user);
 
-        return ResponseEntity.ok(AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken.getRefreshToken())
-                .build());
+        // return ResponseEntity.ok(AuthResponse.builder()
+        //         .accessToken(accessToken)
+                // .refreshToken(refreshToken.getRefreshToken())
+                // .build());
+        return ResponseEntity.ok(authService.login(loginRequest));
     }
 }

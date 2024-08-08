@@ -27,10 +27,10 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/**","/forgotPassword/**","/user/**")
+                        .requestMatchers("/api/users/**","/forgotPassword/**","/user/**","/course/**","/admin/**","/payment/**")
                         .permitAll()
-                        .requestMatchers("/api/admin/**")  // Example for admin access
-                        .hasRole("ADMIN")  // Admin role requirement
+                        .requestMatchers("/api/admin/**")  
+                        .hasRole("ADMIN")  
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session

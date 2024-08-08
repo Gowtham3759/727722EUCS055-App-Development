@@ -2,11 +2,14 @@ package com.example.eduportal.model;
 
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -21,6 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Builder
+@Table(name = "User")
 public class User implements UserDetails 
 {
     @Id
@@ -29,6 +34,7 @@ public class User implements UserDetails
     String firstname;
     String lastname;
     String email;
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
     private RefreshToken refreshToken;
     public RefreshToken getRefreshToken() {
@@ -85,8 +91,7 @@ public class User implements UserDetails
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return Collections.emptyList(); 
     }
     @Override
     public String getUsername() {

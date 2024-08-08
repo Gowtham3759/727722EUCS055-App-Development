@@ -1,6 +1,7 @@
 package com.example.eduportal.service;
 import org.springframework.stereotype.Service;
 import com.example.eduportal.model.User;
+import com.example.eduportal.model.UserRoleEnum;
 import com.example.eduportal.repository.UserRepository;
 import com.example.eduportal.utils.AuthResponse;
 import com.example.eduportal.utils.LoginRequest;
@@ -21,13 +22,19 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
 
-
+         UserRoleEnum role = UserRoleEnum.USER;
+        
+        // Check if the user should be an admin
+        if (registerRequest.getEmail().equals("gowtham3759@gmail.com") && registerRequest.getPassword().equals("12345")) {
+            role = UserRoleEnum.ADMIN;
+        }
         var user = User.builder()
                 .firstname(registerRequest.getFirstname())
                 .lastname(registerRequest.getLastname())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .premium(registerRequest.getPremium())
+                .role(role)
                 .build();
 
         User savedUser = userRepository.save(user);

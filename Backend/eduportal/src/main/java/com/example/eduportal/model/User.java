@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,6 +36,9 @@ public class User implements UserDetails
     String firstname;
     String lastname;
     String email;
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role;
+    
     @JsonIgnore
     @OneToOne(mappedBy = "user")
     private RefreshToken refreshToken;
@@ -90,12 +95,19 @@ public class User implements UserDetails
         this.premium = premium;
     }
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); 
+    public Collection<? extends GrantedAuthority> getAuthorities() 
+    {
+        return Collections.emptyList();
     }
     @Override
     public String getUsername() {
         return email;
+    }
+    public UserRoleEnum getRole() {
+        return role;
+    }
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
     }
 
 }

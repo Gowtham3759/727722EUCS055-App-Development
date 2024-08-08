@@ -21,22 +21,26 @@ public class CourseController
 {
     @Autowired
     CourseService service;
+    //to post the course object
     @PostMapping("/post")
     public Course post(@RequestBody Course obj)
     {
         service.post(obj);
         return obj;
     }
+    // to get the list of all courses
     @GetMapping("/get")
     public List<Course> findall()
     {
         return service.getall();
     }
+    //to delete all the users
     @DeleteMapping("/dcourse/{id}")
     public Course dCourse(@PathVariable int id)
     {
         return service.dcourse(id);
     }
+    //to change the cost of a course
     @PutMapping("/changecost/{id}/{newcost}")
     public String changecost(@PathVariable int id,@PathVariable int newcost)
     {

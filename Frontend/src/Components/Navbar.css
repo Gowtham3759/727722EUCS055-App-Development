@@ -1,72 +1,82 @@
-/* Navbar.css */
-
+/* src/components/Navbar.css */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: black;
-  padding: 10px 20px;
   color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
-.navbar-logo {
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.navbar-links {
+.navbar-title {
   display: flex;
   align-items: center;
 }
 
-.navbar-link {
-  margin-left: 20px;
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
+.navbar-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+  margin-right: 10px; /* Space between icon and text */
 }
 
-.navbar-link:hover {
-  text-decoration: underline;
+.navbar-title h1 {
+  margin: 0;
+  font-size: 1.7rem; /* Adjust font size as needed */
+  color: white;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.admin-login-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Space between the admin login button and account icon */
+}
+
+.admin-login-btn:hover {
+  color: #1abc9c; /* Change color on hover */
 }
 
 .account-icon {
-  display: flex;
-  align-items: center;
   position: relative;
   cursor: pointer;
 }
 
+.account-icon-image {
+  font-size: 1.5rem; /* Adjust icon size */
+}
+
 .dropdown-menu {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 40px;
+  top: 100%;
   right: 0;
-  background-color: white;
-  color: black;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  overflow: hidden;
-  z-index: 1;
+  color: white;
+  border: 1px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 5px 0;
 }
 
 .dropdown-item {
   padding: 10px 20px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #f1f1f1;
-}
-
-.logout-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: red;
-}
-
-.user-info {
-  font-weight: bold;
-  background-color: #f1f1f1;
+  background-color: white;
 }

@@ -1,128 +1,98 @@
-.main-layout {
-  margin-left: 0;
+/* src/Components/Animation.css */
+.main-layout12 {
+  margin-left: 80px; /* Account for side panel */
+  margin-top: 50px; /* Account for navbar */
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  height: calc(100vh - 50px);
+  width: calc(100vw - 80px);
+  background-color: #141414; /* Dark background similar to Netflix */
+  overflow-y: auto; /* Allow vertical scrolling if needed */
+}
+
+.topic12 {
   width: 100%;
-  overflow:auto
-  }
-  
-  .content {
-    width: 90%;
-    margin: 0 auto;
-  }
-  
-  .container-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem; 
-  }
-  #container {
-    flex: 1 1 30%;
-    box-sizing: border-box;
-    margin: 0.625rem;
-    padding: 0.625rem; 
-    border: 3px solid black;
-    border-radius: 0.8rem; 
-    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
-    text-align: center;
-    max-width: calc(33.333% - 1.25rem); 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-  }
-  .container img {
-    max-width: 100%;
-    height: 80%;
-  }
-  
-  .container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  }
-  
-  @media (max-width: 48rem) { 
-    .container {
-      flex: 1 1 45%;
-      max-width: calc(50% - 1.25rem); 
-    }
-  }
-  
-  @media (max-width: 30rem) { 
-    .container {
-      flex: 1 1 100%;
-      max-width: calc(100% - 1.25rem);
-    }
-  }
-  .name {
-    font-size: larger;
-    font-weight: bolder;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-top: 0.5rem;
-  }
-  .age-buttons button {
-    margin: 0 1.5rem; 
-    padding: 1rem 2rem; 
-    font-size: 1.25rem;
-    font-weight: bold; 
-    border: none; 
-    border-radius: 1.5rem; 
-    background: linear-gradient(145deg, #6e8efb, #a777e3); 
-    color: white; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-  }
-  .age-buttons button:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .age-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .topic h1 {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    font-size: 3rem; 
-    font-weight:400;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.8); 
-    margin: 0;
-    text-transform: uppercase; 
-    letter-spacing: 2px; 
-  }
-  .container p {
-    font-family: 'Arial', sans-serif; 
-    font-size:larger; 
-    font-weight:500;
-    color: #333; 
-    margin: 0.5rem 0; 
-    line-height: 1.5; 
-    text-transform: capitalize; 
-  }
-  video {
-    width: 100%;
-    height: var(--video-height);
-    max-width: 100%;
-    border: 0.125rem solid #ccc;
-    border-radius: 0.625rem;
-  }
-  
-  .name {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  #topic {
-    background-color: white;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    margin-bottom: 2%;
-  }
-  
+  color: white;
+  text-align: center;
+}
+
+.topic12 h1 {
+  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.age-buttons12 {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.age-buttons12 button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 2rem;
+  background: linear-gradient(145deg, #e50914, #b81d24);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.age-buttons12 button:hover {
+  background-color: #b81d24;
+}
+
+.container-row12 {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to the next row */
+  gap: 1.5rem;
+  justify-content: center; /* Center the items horizontally */
+}
+
+.container12 {
+  border: none; /* Remove border for cleaner look */
+  border-radius: 10px; /* Increase border-radius for smoother corners */
+  background-color: #1f1f1f; /* Dark background to match overall theme */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for modern look */
+  overflow: hidden; /* Ensure content stays within bounds */
+  flex: 0 1 calc(30% - 2rem); /* Three items per row with reduced width */
+  max-width: calc(30% - 2rem);
+  max-height: 300px; /* Three items per row with reduced width */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.container12:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Enhance hover shadow effect */
+}
+
+.container12 video {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency with course cards */
+  object-fit: cover; /* Ensure the video covers the container without stretching */
+  border-bottom: 2px solid #e50914; /* Add bottom border to video for separation */
+}
+
+.name12 {
+  font-size: 1.2rem; /* Slightly larger font size */
+  font-weight: bold;
+  color: white; /* White color for text inside dark background */
+  margin: 1rem 0; /* Add vertical margin */
+  text-align: center;
+  overflow-wrap: break-word; /* Handle long titles */
+  padding: 0 1rem; /* Horizontal padding */
+}
+
+.namehead12 {
+  color: white;
+}

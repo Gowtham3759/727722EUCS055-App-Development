@@ -1,53 +1,39 @@
-import React, { useState, useEffect ,useContext} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { FaRocket, FaUserCircle, FaSignInAlt } from 'react-icons/fa';
 import './Navbar.css';
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
-import { UserContext } from './UserContext';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ handleLogout, userName }) => {
+const Navbar = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { userName1 } = useContext(UserContext);
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
   };
 
-  const closeDropdown = () => {
-    setDropdownOpen(false);
+  const handleAdmin = () => {
+    navigate('/admin');
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.closest('.account-icon')) {
-        closeDropdown();
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  const handleLogout = () => {
+    navigate('/login');
+  };
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo" onClick={() => navigate('/')}>EduPortal</div>
-      <div className="navbar-links">
-        <div className="navbar-link" onClick={() => navigate('/admin')}>Admin Login</div>
-        <div className="account-icon" onClick={toggleDropdown} role="button" aria-haspopup="true" aria-expanded={dropdownOpen}>
-        <div className="navbar-link">{userName1?userName1:'Guest'}</div>
-          <FaUserCircle size={24} />
-          {dropdownOpen && (
+      <div className="navbar-title">
+        <FaRocket className="navbar-icon" />
+        <h1>EduGo!</h1>
+      </div>
+      <div className="navbar-menu">
+        <button className="admin-login-btn" onClick={handleAdmin}>
+          <FaSignInAlt /> Admin Login
+        </button>
+        <div className="account-icon" onClick={handleDropdownToggle}>
+          <FaUserCircle className="account-icon-image" />
+          {showDropdown && (
             <div className="dropdown-menu">
-              <div className="dropdown-item user-info">
-                <span className="user-name">{userName}</span>
-              </div>
-              <div className="dropdown-item" onClick={() => navigate('/profile')}>Profile</div>
-              <div className="dropdown-item" onClick={() => navigate('/settings')}>Settings</div>
-              <div className="dropdown-item logout-item" onClick={handleLogout}>
-                <FaSignOutAlt size={16} />
-                <span>Logout</span>
-              </div>
+              <div className="dropdown-item" onClick={handleLogout}>Logout</div>
             </div>
           )}
         </div>

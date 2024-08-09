@@ -6,7 +6,7 @@ import mathImg from './maths.png';
 import scienceImg from './science.jpeg';
 import musicImg from './music.jpeg';
 import readingImg from './reading.avif';
-import Payment from './Payments'; // Import the Payment component
+import Payment from './Payments';
 
 const OnlineClasses = () => {
   const [activePanel, setActivePanel] = useState('online-classes');
@@ -98,7 +98,7 @@ const OnlineClasses = () => {
           </div>
         </>
       ) : (
-        <Payment />
+        <Payment/>
       )}
     </div>
   );

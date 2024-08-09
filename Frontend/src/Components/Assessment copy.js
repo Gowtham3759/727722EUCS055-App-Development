@@ -161,30 +161,30 @@ const Assessment = () => {
   };
 
   return (
-    <div className="all3">
-    <div className="assessment-container">
+    <div className="all365">
+    <div className="assessment-container65">
       <h1>{currentStory.title}</h1>
       <p>{currentStory.content}</p>
       {showScore ? (
-        <div className="score-section">
+        <div className="score-section65">
           <h2>Your Score</h2>
           <p>You scored {score} out of {currentStory.questions.length}</p>
-          <button onClick={handleNextStory} className="next-button">Next Story</button>
+          <button onClick={handleNextStory} className="next-button65">Next Story</button>
         </div>
       ) : (
         <>
-          <div className="question-section">
-            <div className="question-count">
+          <div className="question-section65">
+            <div className="question-count65">
               <span>Question {currentQuestionIndex + 1}</span>/{currentStory.questions.length}
             </div>
-            <div className="question-text">{currentQuestion.question}</div>
+            <div className="question-text65">{currentQuestion.question}</div>
           </div>
-          <div className="answer-section">
+          <div className="answer-section65">
             {currentQuestion.options.map((option) => (
               <button
                 onClick={() => handleAnswerOptionClick(option)}
                 key={option}
-                id="answer-button"
+                id="answer-button65"
               >
                 {option}
               </button>

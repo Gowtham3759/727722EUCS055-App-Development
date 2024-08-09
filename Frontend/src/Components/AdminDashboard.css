@@ -59,7 +59,7 @@
 .side-panel23 {
   width: 200px;
   background-color: black;
-  height: 599px;
+  height: 90.8vh;
   padding: 20px;
 }
 
@@ -107,6 +107,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: 90.8vh;
   color: #fff; /* Optional: ensures text is readable against the background image */
 }
 

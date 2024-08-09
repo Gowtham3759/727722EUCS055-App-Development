@@ -9,6 +9,7 @@ import Contact from './Components/Contact';
 import AdminPage from './Components/AdminPage';
 import AdminDashboard from './Components/AdminDashboard';
 import { UserProvider } from './Components/UserContext';
+import AboutUs from './Components/About-us/AboutUs';
 // import { UserProvider } from './Components/UserContext';
 
 const App = () => {

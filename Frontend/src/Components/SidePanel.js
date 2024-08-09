@@ -1,36 +1,30 @@
-// SidePanel.js
 import React from 'react';
-import { FaHome, FaBook, FaChalkboardTeacher, FaGraduationCap, FaUser, FaEnvelope, FaCheckCircle, FaBookOpen, FaCog, FaAlignLeft } from 'react-icons/fa';
+import { FaHome, FaBookOpen, FaVideo, FaChalkboardTeacher, FaQuestionCircle, FaClipboardCheck, FaCreditCard, FaEnvelope } from 'react-icons/fa';
 import './SidePanel.css';
 
-const SidePanel = ({ activeView, onViewChange, onCollapse, collapsed }) => {
+const Sidepanel = ({ activeView, onViewChange }) => {
   return (
-    <aside className={`side-panel-container ${collapsed ? 'collapsed' : ''}`}>
-      <button className="collapse-button" onClick={onCollapse}>
-        <FaAlignLeft />
-      </button>
-      <ul className="side-panel-links">
+    <aside className="sidepanel">
+      <ul>
         {[
           { key: 'home', icon: <FaHome />, text: 'Home' },
           { key: 'storybook', icon: <FaBookOpen />, text: 'Storybook' },
-          { key: 'Videos', icon: <FaChalkboardTeacher />, text: 'Videos' },
-          { key: 'online-classes', icon: <FaGraduationCap />, text: 'Online Classes' },
-          { key: 'sis', icon: <FaUser />, text: 'Educative Quiz' },
-          { key: 'assessment', icon: <FaCheckCircle />, text: 'Assessment' },
-          { key: 'resource-library', icon: <FaBookOpen />, text: 'Payment' },
+          { key: 'videos', icon: <FaVideo />, text: 'Videos' },
+          { key: 'online-classes', icon: <FaChalkboardTeacher />, text: 'Online Classes' },
+          { key: 'sis', icon: <FaQuestionCircle />, text: 'Educative Quiz' },
+          { key: 'assessment', icon: <FaClipboardCheck />, text: 'Assessment' },
+          { key: 'resource-library', icon: <FaCreditCard />, text: 'Payment' },
           { key: 'communication-tools', icon: <FaEnvelope />, text: 'Contact Us' },
-          // { key: 'educational-content', icon: <FaBook />, text: 'Educational Content' },
-          // { key: 'settings', icon: <FaCog />, text: 'Settings' }
         ].map(({ key, icon, text }) => (
-          <li key={key}>
+          <li key={key} className={activeView === key ? 'active' : ''}>
             <button
-              className={`side-panel-link ${activeView === key ? 'active' : ''}`}
+              className={`sidepanel-link ${activeView === key ? 'active' : ''}`}
               onClick={() => onViewChange(key)}
             >
-              <div className={`side-panel-icon ${activeView === key ? 'active' : ''}`}>
+              <div className="sidepanel-icon">
                 {icon}
               </div>
-              {!collapsed && <span className="side-panel-text">{text}</span>}
+              <span className="sidepanel-text">{text}</span>
             </button>
           </li>
         ))}
@@ -39,4 +33,4 @@ const SidePanel = ({ activeView, onViewChange, onCollapse, collapsed }) => {
   );
 };
 
-export default SidePanel;
+export default Sidepanel;

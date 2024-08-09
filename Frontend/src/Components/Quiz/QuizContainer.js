@@ -51,15 +51,15 @@ const QuizContainer = () => {
   }
 
   return (
-    <div id='qbox'>
-      <br/>
+    <div id="qbox">
+      <br />
       {questions.length > 0 ? (
         <Question
           question={questions[currentQuestionIndex]}
           onAnswerClick={handleAnswerClick}
         />
       ) : (
-        <p id='load'>Loading questions...</p>
+        <p id="load">Loading questions...</p>
       )}
     </div>
   );

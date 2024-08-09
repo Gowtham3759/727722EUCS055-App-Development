@@ -160,18 +160,24 @@ const AdminDashboard = () => {
   };
 
   const handleApproveOrder = async (id) => {
+    const orderToApprove = orders.find(order => order.id === id);
+    const approvedOrder = { ...orderToApprove, status: 'Approved' };
+
     try {
       await fetch(`http://localhost:8080/orders/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'Approved' })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(approvedOrder)
       });
-      fetchOrders(); // Fetch orders again to reflect the change
+      setOrders(orders.map(order => (order.id === id ? approvedOrder : order)));
       showPopupMessage('Order approved successfully!');
     } catch (error) {
       console.error('Error approving order:', error);
     }
   };
+  
   
 
   const handleSignOut = () => {

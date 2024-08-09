@@ -10,6 +10,7 @@ import Flip6 from './Flip6';
 import Flip7 from './Flip7';
 import Flip8 from './Flip8';
 import Flip9 from './Flip9';
+
 const Flippy = () => {
   const [ageRange, setAgeRange] = useState('0-3');
 
@@ -26,18 +27,18 @@ const Flippy = () => {
   };
 
   return (
-    <div className="flipbook-page">
-      <div className="age-selector">
-        <button className='ageBtn' onClick={() => setAgeRange('0-3')}>0-3</button>
-        <button className='ageBtn' onClick={() => setAgeRange('4-6')}>4-6</button>
-        <button className='ageBtn' onClick={() => setAgeRange('7-12')}>7-12</button>
+    <div className="flipbook-page8">
+      <div className="age-selector8">
+        <button className='ageBtn8' onClick={() => setAgeRange('0-3')}>0-3</button>
+        <button className='ageBtn8' onClick={() => setAgeRange('4-6')}>4-6</button>
+        <button className='ageBtn8' onClick={() => setAgeRange('7-12')}>7-12</button>
       </div>
-      <h3 id='ageTag'>Age Category: {ageRange}</h3>
-      <div className="flipbook-container">
+      <h3 id='ageTag8'>Age Category: {ageRange}</h3>
+      <div className="flipbook-container8">
         {flipbooksByAgeRange[ageRange].map((FlipbookComponent, index) => (
-          <div key={index} className="flipbook-item">
+          <div key={index} className="flipbook-item8">
             <FlipbookComponent />
-            <h3 className="flipbook-title">{titlesByAgeRange[ageRange][index]}</h3>
+            <h3 className="flipbook-title8">{titlesByAgeRange[ageRange][index]}</h3>
           </div>
         ))}
       </div>

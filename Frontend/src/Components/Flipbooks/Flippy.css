@@ -1,23 +1,24 @@
 /* src/App.css */
 
-.flipbook-page {
+.flipbook-page8 {
   font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-.flipbook-page {
+  color: white;
+  height: calc(100vh - 50px); /* Subtracting navbar height */
+  margin-top: 50px;
+  margin-left: 80px; /* Accounting for side panel width */
+  width: calc(100vw - 80px); /* Corrected width calculation */
   padding: 2% 3%;
+  box-sizing: border-box;
+  background: url('../home2.jpeg') no-repeat center center;
+  background-size: cover; /* Include padding and border in the element's total width and height */
 }
 
-.age-selector {
+.age-selector8 {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.ageBtn {
+.ageBtn8 {
   margin: 20px 5px;
   padding: 10px 20px;
   background-color: #333;
@@ -28,68 +29,64 @@
   transition: background-color 0.3s ease;
 }
 
-#ageTag {
+#ageTag8 {
   margin: 20px 5px;
 }
 
-button:hover {
+.ageBtn8:hover {
   background-color: #555;
 }
 
-.flipbook-container {
+.flipbook-container8 {
   display: flex;
-  flex-wrap: no-wrap;
+  flex-wrap: wrap; /* Allow wrapping of items */
   justify-content: space-between;
-  margin: 0px 10px;
-  /* margin: 10x 5px 0px 20px;
-  padding: 20px; */
-
+  gap: 10px; /* Space between items */
 }
 
-.flipbook-item {
-  flex: 1 0 5%; /* Adjusted for better responsiveness */
-  /* margin: 10x 5px 0px 20px;
-  padding: 20px; */
-  width: 30%;
-  padding:10px 10px;
+.flipbook-item8 {
+  flex: 1 0 30%; /* Adjusted for better responsiveness */
+  max-width: 30%;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease;
   text-align: center; /* Center content */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.flipbook-item:hover {
+.flipbook-item8:hover {
   transform: translateY(-5px);
 }
 
-.flipbook-title {
+.flipbook-title8 {
   text-align: center;
   margin-top: 15px;
   font-size: 1.2em;
   color: #555;
 }
 
-
 /* Media Queries for Responsiveness */
 @media (max-width: 1200px) {
-  .flipbook-item {
+  .flipbook-item8 {
     flex: 1 0 45%;
+    max-width: 45%;
   }
 }
 
 @media (max-width: 768px) {
-  .flipbook-item {
+  .flipbook-item8 {
     flex: 1 0 100%;
+    max-width: 100%;
     margin: 10px 0;
   }
 
-  .ageBtn {
+  .ageBtn8 {
     padding: 8px 16px;
   }
 
-  .flipbook-title {
+  .flipbook-title8 {
     font-size: 1em;
   }
 }

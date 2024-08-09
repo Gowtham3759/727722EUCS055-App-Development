@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-import './Dashboard.css';
+import './Dashboard.css'; // Ensure your CSS file is correct
 import Navbar from './Navbar';
 import Home from './Home';
-import EducationalContent from './EducationalContent';
-import LMS from './LMS';
-import OnlineClasses from './OnlineClasses';
-import SIS from './SIS';
-import CommunicationTools from './CommunicationTools';
 import Assessment from './Assessment copy';
-import ResourceLibrary from './ResourceLibrary';
 import Settings from './Settings';
 import Flippy from './Flipbooks/Flippy';
-import SidePanel from './SidePanel';
 import Animation from './Animations';
 import Payment from './Payments';
+import Sidepanel from './SidePanel';
 import Contact from './Contact';
-import QuizContainer from './Quiz/QuizContainer'
+import QuizContainer from './Quiz/QuizContainer';
+import EducationalContent from './EducationalContent';
+import OnlineClasses from './OnlineClasses';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,59 +29,35 @@ const Dashboard = () => {
     setCollapsed(!collapsed);
   };
 
-  const renderContent = () => {
-    switch (activeView) {
-      case 'home':
-        return <Home />;
-      case 'educational-content':
-        return <EducationalContent />;
-      case 'Videos':
-        return <Animation />;
-      case 'online-classes':
-        return <OnlineClasses />;
-      case 'sis':
-        return <QuizContainer />;
-      case 'communication-tools':
-        return <Contact />;
-      case 'assessment':
-        return <Assessment />;
-      case 'resource-library':
-        return <Payment />;
-      case 'settings':
-        return <Settings />;
-      case 'storybook':
-        return <Flippy />;
-      default:
-        return <div className="content-panel">Select a section</div>;
-    }
+  const contentComponents = {
+    home: <Home />,
+    'educational-content': <EducationalContent />,
+    videos: <Animation />,
+    'online-classes': <OnlineClasses />,
+    sis: <QuizContainer />,
+    'communication-tools': <Contact />,
+    assessment: <Assessment />,
+    'resource-library': <Payment />,
+    settings: <Settings />,
+    storybook: <Flippy />,
   };
 
-  const shouldDisplayHeading = activeView !== 'home';
+  const renderContent = () => contentComponents[activeView] || <div className="content-panel">Select a section</div>;
 
   return (
-    <div className={`dashboard-container ${collapsed ? 'collapsed' : ''}`}>
+    <div className="dashboard">
       <Navbar handleLogout={handleLogout} />
-      <div className="dashboard-content">
-        <SidePanel 
-          activeView={activeView}
-          onViewChange={setActiveView}
-          onCollapse={handleCollapse}
-          collapsed={collapsed}
-        />
-        <main className="main-section">
-          {/* {shouldDisplayHeading && (
-            <h1 className="main-title">{activeView.charAt(0).toUpperCase() + activeView.slice(1).replace('-', ' ')}</h1>
-          )} */}
-          <CSSTransition
-            in={true}
-            timeout={300}
-            classNames="fade"
-            unmountOnExit
-          >
-            {renderContent()}
-          </CSSTransition>
-        </main>
-      </div>
+      <Sidepanel activeView={activeView} onViewChange={setActiveView} />
+      <main className="content">
+        <CSSTransition
+          in={true}
+          timeout={300}
+          classNames="fade"
+          unmountOnExit
+        >
+          {renderContent()}
+        </CSSTransition>
+      </main>
     </div>
   );
 };

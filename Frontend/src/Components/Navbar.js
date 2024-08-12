@@ -16,6 +16,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem('authToken');
+    // Navigate to the login page
     navigate('/login');
   };
 

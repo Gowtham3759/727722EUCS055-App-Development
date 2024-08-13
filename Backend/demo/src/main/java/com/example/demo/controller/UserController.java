@@ -39,7 +39,6 @@ public class UserController {
 
     @PostMapping("/addNewUser")
     public String addNewUser(@RequestBody UserInfo userInfo) {
-        userInfo.setRoles("ROLE_USER");
         return service.addUser(userInfo);
     }
 
@@ -60,11 +59,17 @@ public class UserController {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
         );
+
         if (authentication.isAuthenticated()) {
-            String token = jwtService.generateToken(authRequest.getUsername());
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
-            return ResponseEntity.ok(response);
+            UserInfo userInfo = service.getUserByUsername(authRequest.getUsername());
+            if (userInfo.getRoles().equals(authRequest.getRole())) {
+                String token = jwtService.generateToken(authRequest.getUsername());
+                Map<String, String> response = new HashMap<>();
+                response.put("token", token);
+                return ResponseEntity.ok(response);
+            } else {
+                throw new UsernameNotFoundException("Invalid role for the user!");
+            }
         } else {
             throw new UsernameNotFoundException("Invalid username or password!");
         }

@@ -171,7 +171,8 @@ const AdminDashboard = () => {
         setNewUser({
             name: '',
             email: '',
-            password: ''
+            password: '',
+            roles:'ROLE_USER'
         });
         fetchUsers();
         showPopupMessage('User added successfully!');
@@ -233,7 +234,7 @@ const handleApproveOrder = async (id) => {
   
 
   const handleSignOut = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('authToken');
     window.location.href = '/login';
   };
 
@@ -258,7 +259,7 @@ const handleApproveOrder = async (id) => {
                 className={activeLink === '/admin-dashboard' ? 'active' : ''}
                 onClick={() => handleLinkClick('/admin-dashboard')}
               >
-                User Management
+                User/Admin Management
               </a>
             </li>
             <li>
@@ -300,7 +301,7 @@ const handleApproveOrder = async (id) => {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Password</th>
+                    <th>Role</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -336,7 +337,7 @@ const handleApproveOrder = async (id) => {
                           <td>{user.id}</td>
                           <td>{user.name}</td>
                           <td>{user.email}</td>
-                          <td>{user.password}</td>
+                          <td>{user.roles}</td>
                           <td>
                             <button onClick={() => handleDelete(user.id)}>Delete</button>
                           </td>

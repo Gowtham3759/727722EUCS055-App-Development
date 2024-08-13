@@ -15,7 +15,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const loginData = { username, password }; // 'username' should match what backend expects
+    const loginData = { username, password, role: 'ROLE_USER' };
 
     try {
         const response = await axios.post('http://localhost:8080/auth/login', loginData);

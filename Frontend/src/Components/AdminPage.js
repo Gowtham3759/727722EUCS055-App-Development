@@ -15,7 +15,7 @@ const AdminLoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const loginData = { username, password, role: 'ROLE_ADMIN' }; // Add role to the login data
+    const loginData = { username, password, role: 'ROLE_ADMIN' };
 
     try {
       const response = await axios.post('http://localhost:8080/auth/login', loginData);

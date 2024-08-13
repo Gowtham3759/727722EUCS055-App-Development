@@ -24,6 +24,15 @@ public class UserInfoService implements UserDetailsService {
     private PasswordEncoder encoder;
     @Autowired
     OrdersRepository orepo;
+
+    @Autowired
+    private UserInfoRepository useriInfoRepository;
+
+    public UserInfo getUserByUsername(String username) {
+        return useriInfoRepository.findByName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

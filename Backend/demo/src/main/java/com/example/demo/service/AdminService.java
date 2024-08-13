@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,17 +41,17 @@ public class AdminService
         UserInfo obj=urepo.findById(id).get();
         urepo.delete(obj);
     }
-    public void changename(int id,String name)
-    {
-        UserInfo user=urepo.findById(id).get();
-        user.setName(name);
-        urepo.save(user);
-    }
-    public void changeemail(int id,String email)
-    {
-        UserInfo user=urepo.findById(id).get();
-        user.setEmail(email);
-        urepo.save(user);
+    public boolean updateUser(int id, UserInfo updatedUser) {
+        Optional<UserInfo> userOpt = urepo.findById(id);
+        if (userOpt.isPresent()) {
+            UserInfo existingUser = userOpt.get();
+            existingUser.setName(updatedUser.getName());
+            existingUser.setEmail(updatedUser.getEmail());
+            // Update other fields as needed
+            urepo.save(existingUser);
+            return true;
+        }
+        return false;
     }
     public List<Orders> getorders()
     {

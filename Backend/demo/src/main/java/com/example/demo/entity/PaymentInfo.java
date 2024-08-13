@@ -46,4 +46,3 @@ public class PaymentInfo
     }
     String expiryDate;
 }
-

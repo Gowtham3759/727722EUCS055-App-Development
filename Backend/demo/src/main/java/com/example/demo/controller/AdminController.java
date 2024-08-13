@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,15 +51,14 @@ public class AdminController
     {
         service.deleteuser(id);
     }
-    @PutMapping("/editname")
-    public void changename(int id,String name)
-    {
-        service.changename(id, name);
-    }
-    @PutMapping("/editemail")
-    public void changeemail(int id,String email)
-    {
-        service.changename(id, email);
+    @PutMapping("/edituser/{id}")
+    public ResponseEntity<String> editUser(@PathVariable int id, @RequestBody UserInfo updatedUser) {
+        boolean success = service.updateUser(id, updatedUser);
+        if (success) {
+            return ResponseEntity.ok("User updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
     }
     @GetMapping("/get/orders")
     public List<Orders> getorders()

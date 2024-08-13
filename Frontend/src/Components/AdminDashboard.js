@@ -7,19 +7,17 @@ const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [newUser, setNewUser] = useState({
-    firstName: '',
-    lastName: '',
-    mobile: '',
+    name:'',
     email: '',
-    password: ''
+    password: '',
+    roles:"ROLE_USER"
   });
   const [admins, setAdmins] = useState([]);
   const [newAdmin, setNewAdmin] = useState({
-    firstName: '',
-    lastName: '',
-    mobile: '',
+    name:'',
     email: '',
-    password: ''
+    password: '',
+    roles:"ROLE_ADMIN"
   });
   const [activeLink, setActiveLink] = useState('/admin-dashboard');
   const [popupMessage, setPopupMessage] = useState('');
@@ -33,15 +31,25 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchUsers = async () => {
+    const token = localStorage.getItem('authToken'); // Retrieve the access token from localStorage
+
     try {
-      const response = await fetch('http://localhost:8080/users');
-      if (!response.ok) throw new Error('Network response was not ok.');
-      const data = await response.json();
-      setUsers(data);
+        const response = await fetch('http://localhost:8080/admin/get/users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Pass the token in the Authorization header
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok.');
+        const data = await response.json();
+        setUsers(data);
     } catch (error) {
-      console.error('Error fetching users:', error);
+        console.error('Error fetching users:', error);
     }
-  };
+};
+
 
   const fetchAdmins = async () => {
     try {
@@ -55,15 +63,26 @@ const AdminDashboard = () => {
   };
 
   const fetchOrders = async () => {
+    const token = localStorage.getItem('authToken'); // Retrieve the access token from localStorage
+    // console.log(${token});
+    console.log(token)
     try {
-      const response = await fetch('http://localhost:8080/orders');
+      const response = await fetch('http://localhost:8080/admin/get/orders', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Pass the token in the Authorization header
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(response)
+      if (!response.ok) throw new Error('Network response was not ok.');
       const data = await response.json();
-      console.log('Fetched Orders:', data); // Log data to check courseName
       setOrders(data);
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
   };
+  
   
 
   const showPopupMessage = (message) => {
@@ -82,6 +101,10 @@ const AdminDashboard = () => {
   const handleNewUserChange = (e) => {
     const { name, value } = e.target;
     setNewUser((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleNewAdminChange = (e) => {
+    const { name, value } = e.target;
+    setNewAdmin((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async (id) => {
@@ -103,80 +126,109 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:8080/users/${id}`, {
-        method: 'DELETE'
+      // Get the token from local storage or wherever you're storing it
+      const token = localStorage.getItem('authToken');
+      const response = await fetch(`http://localhost:8080/admin/deleteuser/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
-      fetchUsers();
-      showPopupMessage('User deleted successfully!');
+  
+      // Check if the response status is OK
+      if (response.ok) {
+        fetchUsers();
+        showPopupMessage('User deleted successfully!');
+      } else {
+        const errorData = await response.json();
+        showPopupMessage(`Error deleting user: ${errorData.message || 'Unknown error'}`);
+      }
     } catch (error) {
       console.error('Error deleting user:', error);
+      showPopupMessage(`Error deleting user: ${error.message}`);
     }
   };
+  
 
   const handleAddUser = async () => {
-    try {
-      await fetch('http://localhost:8080/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-      });
-      setNewUser({
-        firstName: '',
-        lastName: '',
-        mobile: '',
-        email: '',
-        password: ''
-      });
-      fetchUsers();
-      showPopupMessage('User added successfully!');
-    } catch (error) {
-      console.error('Error adding user:', error);
-    }
-  };
-
-  const handleAddAdmin = async () => {
-    try {
-      await fetch('http://localhost:8080/admins', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newAdmin)
-      });
-      setNewAdmin({
-        firstName: '',
-        lastName: '',
-        mobile: '',
-        email: '',
-        password: ''
-      });
-      fetchAdmins();
-      showPopupMessage('Admin added successfully!');
-    } catch (error) {
-      console.error('Error adding admin:', error);
-    }
-  };
-
-  const handleApproveOrder = async (id) => {
-    const orderToApprove = orders.find(order => order.id === id);
-    const approvedOrder = { ...orderToApprove, status: 'Approved' };
+    const token = localStorage.getItem('authToken'); // Retrieve the access token from localStorage
 
     try {
-      await fetch(`http://localhost:8080/orders/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(approvedOrder)
-      });
-      setOrders(orders.map(order => (order.id === id ? approvedOrder : order)));
-      showPopupMessage('Order approved successfully!');
+        await fetch('http://localhost:8080/auth/addNewUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Add token to the Authorization header
+            },
+            body: JSON.stringify({
+                name: newUser.name,
+                email: newUser.email,
+                password: newUser.password,
+                roles:newUser.roles
+            })
+        });
+        setNewUser({
+            name: '',
+            email: '',
+            password: ''
+        });
+        fetchUsers();
+        showPopupMessage('User added successfully!');
     } catch (error) {
-      console.error('Error approving order:', error);
+        console.error('Error adding user:', error);
     }
-  };
+};
+
+
+const handleAddAdmin = async () => {
+  try {
+    const token = localStorage.getItem('authToken'); // Retrieve the access token from localStorage
+    
+    await fetch('http://localhost:8080/auth/addNewUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Add Bearer token to Authorization header
+      },
+      body: JSON.stringify(newAdmin)
+    });
+    
+    setNewAdmin({
+      name: '',
+      email: '',
+      password: ''
+    });
+    fetchAdmins();
+    showPopupMessage('Admin added successfully!');
+  } catch (error) {
+    console.error('Error adding admin:', error);
+  }
+};
+
+const handleApproveOrder = async (id) => {
+  const orderToApprove = orders.find(order => order.id === id);
+  const approvedOrder = { ...orderToApprove, status: 'Approved' };
+
+  try {
+    const token = localStorage.getItem('authToken'); // Retrieve the access token from localStorage
+    
+    await fetch(`http://localhost:8080/admin/changestatus/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Add Bearer token to Authorization header
+      },
+      body: JSON.stringify({ id, status: 'Approved' }) // Adjusted body to only include id and status
+    });
+    
+    setOrders(orders.map(order => (order.id === id ? approvedOrder : order)));
+    showPopupMessage('Order approved successfully!');
+  } catch (error) {
+    console.error('Error approving order:', error);
+  }
+};
+
   
   
 
@@ -246,10 +298,9 @@ const AdminDashboard = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Mobile</th>
+                    <th>Name</th>
                     <th>Email</th>
+                    <th>Password</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -262,24 +313,8 @@ const AdminDashboard = () => {
                           <td>
                             <input
                               type="text"
-                              name="firstName"
+                              name="Name"
                               value={editingUser.firstName || ''}
-                              onChange={handleInputChange}
-                            />
-                          </td>
-                          <td>
-                            <input
-                              type="text"
-                              name="lastName"
-                              value={editingUser.lastName || ''}
-                              onChange={handleInputChange}
-                            />
-                          </td>
-                          <td>
-                            <input
-                              type="text"
-                              name="mobile"
-                              value={editingUser.mobile || ''}
                               onChange={handleInputChange}
                             />
                           </td>
@@ -299,12 +334,10 @@ const AdminDashboard = () => {
                       ) : (
                         <>
                           <td>{user.id}</td>
-                          <td>{user.firstName}</td>
-                          <td>{user.lastName}</td>
-                          <td>{user.mobile}</td>
+                          <td>{user.name}</td>
                           <td>{user.email}</td>
+                          <td>{user.password}</td>
                           <td>
-                            <button onClick={() => setEditingUser(user)}>Edit</button>
                             <button onClick={() => handleDelete(user.id)}>Delete</button>
                           </td>
                         </>
@@ -317,109 +350,79 @@ const AdminDashboard = () => {
           )}
           {activeLink === '/admin-add-user' && (
             <div className="add-user23">
-              <h3>Add New User</h3>
-              <form
+            <h3>Add New User</h3>
+            <form
                 onSubmit={(e) => {
-                  e.preventDefault();
-                  handleAddUser();
+                    e.preventDefault();
+                    handleAddUser();
                 }}
-              >
+            >
                 <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={newUser.firstName}
-                  onChange={handleNewUserChange}
-                  required
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={newUser.name}
+                    onChange={handleNewUserChange}
+                    required
                 />
                 <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={newUser.lastName}
-                  onChange={handleNewUserChange}
-                  required
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={newUser.email}
+                    onChange={handleNewUserChange}
+                    required
                 />
                 <input
-                  type="text"
-                  name="mobile"
-                  placeholder="Mobile"
-                  value={newUser.mobile}
-                  onChange={handleNewUserChange}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={newUser.email}
-                  onChange={handleNewUserChange}
-                  required
-                />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={newUser.password}
-                  onChange={handleNewUserChange}
-                  required
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={newUser.password}
+                    onChange={handleNewUserChange}
+                    required
                 />
                 <button type="submit">Add User</button>
-              </form>
-            </div>
+            </form>
+        </div>
+        
           )}
           {activeLink === '/admin-add-admin' && (
-            <div className="add-admin23">
-              <h3>Add New Admin</h3>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleAddAdmin();
-                }}
-              >
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  value={newAdmin.firstName}
-                  onChange={(e) => setNewAdmin((prev) => ({ ...prev, firstName: e.target.value }))}
-                  required
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={newAdmin.lastName}
-                  onChange={(e) => setNewAdmin((prev) => ({ ...prev, lastName: e.target.value }))}
-                  required
-                />
-                <input
-                  type="text"
-                  name="mobile"
-                  placeholder="Mobile"
-                  value={newAdmin.mobile}
-                  onChange={(e) => setNewAdmin((prev) => ({ ...prev, mobile: e.target.value }))}
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={newAdmin.email}
-                  onChange={(e) => setNewAdmin((prev) => ({ ...prev, email: e.target.value }))}
-                  required
-                />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={newAdmin.password}
-                  onChange={(e) => setNewAdmin((prev) => ({ ...prev, password: e.target.value }))}
-                  required
-                />
-                <button type="submit">Add Admin</button>
-              </form>
-            </div>
+            <div className="add-user23">
+            <h3>Add New Admin</h3>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAddAdmin();
+              }}
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={newAdmin.name}
+                onChange={handleNewAdminChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={newAdmin.email}
+                onChange={handleNewAdminChange}
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={newAdmin.password}
+                onChange={handleNewAdminChange}
+                required
+              />
+              <button type="submit">Add Admin</button>
+            </form>
+          </div>
+        
           )}
           {activeLink === '/admin-manage-orders' && (
   <div className="manage-orders23">
@@ -438,7 +441,7 @@ const AdminDashboard = () => {
           {orders.map(order => (
             <tr key={order.id}>
               <td>{order.id}</td>
-              <td>{order.courseName}</td> {/* Ensure this is correctly mapped */}
+              <td>{order.coursename}</td> {/* Ensure this is correctly mapped */}
               <td>{order.status}</td>
               <td>
                 {order.status !== 'Approved' && (

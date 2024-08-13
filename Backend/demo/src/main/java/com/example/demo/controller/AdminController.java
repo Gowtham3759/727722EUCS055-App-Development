@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Orders;
+import com.example.demo.entity.PaymentInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.service.AdminService;
 
@@ -68,5 +69,9 @@ public class AdminController
     {
         return service.getusers();
     }
-    
+    @GetMapping("/get")
+    public List<PaymentInfo> info()
+    {
+        return service.info();
+    }
 }

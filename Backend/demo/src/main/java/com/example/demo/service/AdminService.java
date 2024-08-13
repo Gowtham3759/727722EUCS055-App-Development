@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Orders;
+import com.example.demo.entity.PaymentInfo;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.OrdersRepository;
 import com.example.demo.repository.PaymentRepository;
@@ -59,5 +60,8 @@ public class AdminService
     {
         return urepo.findAll();
     }
-    
+    public List<PaymentInfo> info()
+    {
+        return prepo.findAll();
+    }
 }

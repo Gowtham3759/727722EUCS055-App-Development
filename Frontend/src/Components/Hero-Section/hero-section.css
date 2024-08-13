@@ -4,7 +4,7 @@
 }
 
 .hero__content {
-  padding-top: 80px;
+  padding-top: 0px;
 }
 .search input {
   border: none;
@@ -21,3 +21,4 @@
   border-radius: 50px;
   margin-top: 20px;
 }
+

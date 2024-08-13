@@ -25,7 +25,7 @@ const HeroSection = ({ onExploreClick }) => { // Receive the prop here
             </button>
           </Col>
 
-          <Col lg="6" md="6">
+          <Col id="imghero" lg="6" md="6">
             <img src={heroImg} alt="" className="w-100 hero__img" />
           </Col>
         </Row>

@@ -1,4 +1,5 @@
-import React, { Fragment, useRef } from "react";
+import React from "react";
+import { useRef } from "react";
 import Header from "../Components/Header/Header";
 import HeroSection from "../Components/Hero-Section/HeroSection";
 import CompanySection from "../Components/Company-section/Company";
@@ -20,20 +21,29 @@ const Home = () => {
       courseSectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
   return (
     <div className="home-container">
-      <Header/>
-      <HeroSection onExploreClick={handleScrollToAbout} /> {/* Pass the scroll handler */}
-      <CompanySection />
+      <Header />
+      <section id="home">
+        <HeroSection onExploreClick={handleScrollToAbout} />
+      </section>
+      <section id="about">
+        <CompanySection />
         <AboutUs />
-      <div ref={courseSectionRef}> {/* Attach the ref to the About Us section */}
+      </section>
+      <section id="courses">
         <Courses />
-      </div>
-      <ChooseUs />
-      <Features />
-      <FreeCourse />
-      <Testimonials />
+      </section>
+      <section id="pages">
+        <ChooseUs />
+      </section>
+      <section id="blog">
+        <Features />
+      </section>
+      <section id="testimonials">
+        <FreeCourse />
+        <Testimonials />
+      </section>
       <Newsletter />
       <Footer />
     </div>

@@ -3,8 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import heroImg from "../../assests/images/hero-img1.png";
 import "./hero-section.css";
 
-const HeroSection = () => {
-  
+const HeroSection = ({ onExploreClick }) => { // Receive the prop here
   return (
     <section>
       <Container>
@@ -21,7 +20,9 @@ const HeroSection = () => {
                 to fit your lifestyle.
               </p>
             </div>
-            <button className="btn explore__btn">Explore Now!</button>
+            <button className="btn explore__btn" onClick={onExploreClick}>
+              Explore Now!
+            </button>
           </Col>
 
           <Col lg="6" md="6">

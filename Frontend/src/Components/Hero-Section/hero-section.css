@@ -22,3 +22,8 @@
   margin-top: 20px;
 }
 
+#imghero{
+  width: 600px;
+  position: relative;
+  margin-top: -80px;
+}
